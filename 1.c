@@ -53,30 +53,35 @@ struct node* delete_first_node(struct node** str){
     }
 }
 // void freeing_all_node(struct node** str){
-//      struct node* tri;
+//      struct node* tri,cap;
+//          tri = str;
+//          cap = NULL;
 //      while(tri){
-        
+//         cap = tri;
+//         tri = tri->next_address;
+//         free(cap);
 //      }
+//    return;
 // }
 int main(){
-    struct node* start = NULL; // this can cause not print of list // this result in 
-    int n;
-    printf("No of value : ");
-    scanf("%d",&n);
-    printf("Enter Value of Data\n");
-    for(int i = 0;i<n;i++){
-        int val = 0;
-        insert_at_last(&start,scanf("%d",&val));
-    }
-    // insert_at_last(&start,10);
-    // insert_at_last(&start,20);
-    // insert_at_last(&start,30);
-    // insert_at_last(&start,40);
-    // insert_at_last(&start,50);
-    // insert_at_last(&start,60);
-    // insert_at_last(&start,70);
-    // insert_at_last(&start,80);
-    // insert_at_last(&start,90);
+    struct node* start = NULL;  
+    // int n;
+    // printf("No of value : ");
+    // scanf("%d",&n);
+    // printf("Enter Value of Data\n");
+    // for(int i = 0;i<n;i++){
+    //     int val = 0;
+    //     insert_at_last(&start,scanf("%d",&val));
+    // }
+    insert_at_last(&start,10);
+    insert_at_last(&start,20);
+    insert_at_last(&start,30);
+    insert_at_last(&start,40);
+    insert_at_last(&start,50);
+    insert_at_last(&start,60);
+    insert_at_last(&start,70);
+    insert_at_last(&start,80);
+    insert_at_last(&start,90);
     print_linklist(start);
     return 0;
 }

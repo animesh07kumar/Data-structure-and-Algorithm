@@ -92,31 +92,58 @@ struct node* insertAtIndex(struct node* head,int data, int index){
         
     
 }
-// struct node* deletingNode(struct node* head,int data, int index){
-//         struct node* tri, *tri2 = NULL ,;
-//         tri = head;
-//         int index_count = 0;
-//         while(tri->next != NULL && index_count <= index){
-//             tri = tri->next;
-//             index_count++;
-//         }
-//         if(index_count-1>index){
-//             printf("List is shorter than index");
-//             exit(1);
-//         }
-//         else if(tri->next == NULL){
-//             insertAtEnd(head,data);
-//         }
-//         else{
-//             tri2 = tri->next;
-//         newNode->next = tri2;
-//         newNode->prev = tri;
-//         tri->next = newNode;
-//         tri2->prev = newNode;
-//         return head;
-//         }
+struct node* delFirst(struct node* head){
+    if(head == NULL){
+        printf("list is empty cannot delete node");
+        exit(1);
+    }
+    head = head->next;
+    free(head->prev);
+    head->prev = NULL;
+    return head;
+    // same thing can be done by different method by creating extra varible
+    // struct node* temp;
+    // temp = head;
+    // head = head->next;
+    // free(temp);
+    // temp = NULL; !good practice
+    // head->prev = NULL
+}
+void delLast(struct node* head){
+    if(head == NULL){
+        printf("list is empty cannot delete node");
+        exit(1);
+    }
+    struct node* tri;
+    tri = head;
+    while(tri->next == NULL){
+        tri = tri->next;
+    }
+    tri = tri->prev;
+    Free(tri->next);
+    tri->next = NULL;
+    return;
+    // same thing can be done by declaring extra variable
+}
+void delAtIndex(struct node* head, int index){
+    struct node* tri = head, *tri2 = NULL;
     
-// }
+    if(head == NULL){
+        printf("list is empty cannot delete node");
+        exit(1);
+    } 
+    while(index != 1){
+        tri = tri->next;
+        index--;
+    }
+    tri2 = tri -> prev;
+    tri2 -> next = tri -> next;
+    tri2 = tri -> next;
+    tri2 -> prev = tri -> prev;
+    free(tri);
+    tri = NULL;
+    return;
+}
 
 void printting_DLL(struct node* head){
     struct node* print_tri = head;

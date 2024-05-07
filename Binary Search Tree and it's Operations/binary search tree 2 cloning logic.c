@@ -116,7 +116,7 @@ int main(){
 
     destroying(tree.root);
     destroying(tree2.root);
-
+    printf("printting after distroying tree2\n");
     printf("in_order_traversal of Tree 2\n");
     in_order_traversal(tree.root);
     printf("\n");

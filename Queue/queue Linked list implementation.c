@@ -4,16 +4,16 @@
 
 typedef struct node{
     int data;
-    Node* next;
+    struct node* next;
 }Node;
 
 typedef struct queue{
     int count;
-    Queue* front;
-    Queue* rear;
+    Node* front;
+    Node* rear;
 }Queue;
 
-void create_queue(){
+Queue* create_queue(){
     Queue* queue = (Queue*)malloc(sizeof(Queue));
     if(!queue){
         printf("Memory Allocation is failed");
@@ -22,7 +22,67 @@ void create_queue(){
     queue->count = 0;
     queue->front = NULL;
     queue->rear = NULL;
+    return queue;
 }
 bool is_empty(Queue* queue){
-    
+    return queue->front == NULL;
+}
+void enqueue(Queue* queue, int data){
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    if(!new_node){
+        printf("Memory Allocation failed");
+        exit(-1);
+    }
+    new_node->data = data;
+    new_node->next = NULL;
+    if(is_empty(queue)){
+        queue->front = new_node;
+        queue->rear = new_node;
+    }
+    else{
+        queue->rear->next = new_node;
+        queue->rear = new_node;
+    }
+    queue->count++;
+}
+int dequeue(Queue* queue){
+    if(is_empty(queue)){
+        printf("Queue is empty");
+        exit(-1);
+    }
+    Node* temp = queue->front;
+    int data = temp->data;
+    queue->front = queue->front->next;
+    free(temp);
+    queue->count--;
+    return data;
+}
+int size_of(Queue* queue){
+    return queue->count;
+}
+void displaying_queue(Queue* queue){
+    printf("\nPrintting Queue\n");
+    Node* temp = queue->front;
+    if(temp != NULL){
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }
+    return;
+}
+int main(){
+    Queue* MyQueue = create_queue();
+    enqueue(MyQueue, 10);
+    enqueue(MyQueue, 20);
+    enqueue(MyQueue, 30);
+    enqueue(MyQueue, 40);
+    displaying_queue(MyQueue);
+    printf("\nnew line\n");
+    printf("%d ",dequeue(MyQueue));
+    printf("%d ",size_of(MyQueue));
+    printf("%d ",dequeue(MyQueue));
+    printf("%d ",dequeue(MyQueue));
+
+
+
+    return 0;
 }

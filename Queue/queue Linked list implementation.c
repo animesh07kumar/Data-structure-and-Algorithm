@@ -49,6 +49,7 @@ int dequeue(Queue* queue){
     if(is_empty(queue)){
         printf("Queue is empty");
         exit(-1);
+    //  return -1;
     }
     Node* temp = queue->front;
     int data = temp->data;
@@ -63,10 +64,23 @@ int size_of(Queue* queue){
 void displaying_queue(Queue* queue){
     printf("\nPrintting Queue\n");
     Node* temp = queue->front;
-    if(temp != NULL){
+    while(temp != NULL){
+
         printf("%d ",temp->data);
         temp = temp->next;
     }
+    return;
+}
+void distroying_queue(Queue* queue){
+    Node* temp;
+    temp = NULL;
+    while(queue->front != NULL){
+        temp = queue->front;
+        free(temp);
+        queue->front = queue->front->next;
+    }
+    free(queue);
+    printf("\nQueue is now been fully dequeued\n");
     return;
 }
 int main(){
@@ -81,8 +95,17 @@ int main(){
     printf("%d ",size_of(MyQueue));
     printf("%d ",dequeue(MyQueue));
     printf("%d ",dequeue(MyQueue));
+    printf("%d ",dequeue(MyQueue));
+    printf("%d ",dequeue(MyQueue));
 
+    enqueue(MyQueue, 11);
+    enqueue(MyQueue, 21);
+    enqueue(MyQueue, 31);
+    enqueue(MyQueue, 41);
+    
+    distroying_queue(MyQueue);
 
+    displaying_queue(MyQueue);
 
     return 0;
 }
